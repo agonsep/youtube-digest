@@ -1,0 +1,17 @@
+{
+  "name": "youtube-digest-trigger",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npx trigger.dev@latest dev",
+    "deploy": "npx trigger.dev@latest deploy"
+  },
+  "dependencies": {
+    "@trigger.dev/sdk": "4.4.3",
+    "nodemailer": "^6.9.0"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.0",
+    "typescript": "^5.4.0"
+  }
+}
