@@ -5,13 +5,13 @@ import nodemailer from "nodemailer";
 
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY!;
 
-const CHANNELS_TO_WATCH: { name: string; channelId: string }[] = [
-  // Add your channels here. To find a channel ID:
-  // Go to the channel → View Page Source → search for "channelId"
-  // Or use: https://www.youtube.com/@ChannelName/about → check URL for /channel/UC...
+const CHANNELS_TO_WATCH: { name: string; channelId: string }[] = [  
   { name: "Anna Cramling",        channelId: "UCOVfq3NNYjlYCz1iou69FwQ" },
+  { name: "Gotham Chess",        channelId: "UCQHX6ViZmPsWiYSFAyS0a3Q" },
   { name: "Nate Kerk",   channelId: "UC2ojq-nuP8ceeHqiroeKhBA" },
-  // { name: "Your Channel",  channelId: "UC..." },
+  { name: "Cole Medin",   channelId: "UCMwVTLZIRRUyyVrkjDpn4pA" },  
+  { name: "AI Revolution", channelId: "UC5l7RouTQ60oUjLjt1Nh-UQ" },
+  { name: "ChesswithAkeem", channelId: "UCRxtTeoTNe_gHxks1G5Jnjw" },
 ];
 
 const EMAIL_CONFIG = {
