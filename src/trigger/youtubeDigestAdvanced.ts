@@ -43,6 +43,8 @@ const CATEGORIES: CategoryConfig[] = [
       { name: "Anna Cramling",  channelId: "UCOVfq3NNYjlYCz1iou69FwQ" },
       { name: "Gotham Chess",   channelId: "UCQHX6ViZmPsWiYSFAyS0a3Q" },
       { name: "ChesswithAkeem", channelId: "UCRxtTeoTNe_gHxks1G5Jnjw" },
+      { name: "Chess Teacher",         channelId: "UC1acS1ETGlVRXBRQ25BNzVG" },
+      { name: "Chess Teacher Digital", channelId: "UCLi0e5z6AvatTcGNGvKdEog" },
     ],
     videoPrompt: `You are a chess content analyst. Analyze this chess YouTube video based on its title and description.
 Provide a concise analysis covering:
@@ -61,6 +63,81 @@ Write a brief collection summary (3–4 sentences) that:
 Be engaging, like a newsletter editor speaking to chess enthusiasts.`,
   },
   {
+    id: "neuroscience",
+    name: "Neuroscience",
+    emoji: "🧠",
+    color: "#4a1942",
+    channels: [
+      { name: "Olga Loiek", channelId: "UChCmdRBQhul2hd7Idk1Qyvg" },
+    ],
+    videoPrompt: `You are a neuroscience content analyst. Analyze this YouTube video based on its title and description.
+Provide a concise analysis covering:
+1. **Topic**: What brain region, cognitive process, disorder, or research finding is discussed?
+2. **Audience**: General public / Students / Researchers / Clinicians
+3. **Key takeaway**: One sentence on the main insight or finding
+4. **Why it matters**: The broader implication for understanding the brain or human behavior (1 sentence)
+
+Keep it under 80 words total. Be scientifically accurate but accessible.`,
+    collectionPrompt: `You are a neuroscience content curator. Below is a list of neuroscience YouTube videos published today, each with an AI analysis.
+Write a brief collection summary (3–4 sentences) that:
+- Highlights the main themes across today's neuroscience content (e.g., cognition, mental health, brain research, neuroplasticity)
+- Notes any standout finding or topic that bridges science and everyday life
+- Gives a sense of what the neuroscience community is exploring and communicating today
+
+Be thoughtful and curious, like a science communicator writing for an educated general audience.`,
+  },
+  {
+    id: "electronics",
+    name: "Electronics",
+    emoji: "⚡",
+    color: "#d4a017",
+    channels: [
+      { name: "ElectrArc240",       channelId: "UCPa1ivCpLcqP60OGqb9Yzqw" },
+      { name: "DroneBot Workshop",  channelId: "UCzml9bXoEM0itbcE96CB03w" },
+      { name: "Phil's Lab",         channelId: "UCVryWqJ4cSlbTSETBHpBUWw" },
+      { name: "Ben Eater",          channelId: "UCS0N5baNlQWJCUrhCEo8WlA" },
+    ],
+    videoPrompt: `You are an electronics and electrical engineering content analyst. Analyze this YouTube video based on its title and description.
+Provide a concise analysis covering:
+1. **Topic**: What component, circuit, project, or concept is featured? (e.g., microcontrollers, PCB design, power electronics, sensors)
+2. **Level**: Beginner / Hobbyist / Intermediate / Advanced / Professional
+3. **Key takeaway**: One sentence on what viewers will learn or build
+4. **Worth watching if**: Describe the ideal viewer — maker, engineer, student, etc.
+
+Keep it under 80 words total. Be technically precise but accessible.`,
+    collectionPrompt: `You are an electronics content curator. Below is a list of electronics YouTube videos published today, each with an AI analysis.
+Write a brief collection summary (3–4 sentences) that:
+- Highlights the main themes across today's electronics content (e.g., microcontrollers, RF, power systems, DIY builds)
+- Notes any standout project, tutorial, or concept worth attention
+- Gives a sense of what the electronics/maker community is building and learning today
+
+Be enthusiastic and technically grounded, like a newsletter for engineers and makers.`,
+  },
+  {
+    id: "tech-news",
+    name: "Tech News",
+    emoji: "📡",
+    color: "#6a0572",
+    channels: [
+      { name: "CNBC", channelId: "UCvJJ_dzjViJCoLf5uKUTwoA" },
+    ],
+    videoPrompt: `You are a technology news analyst. Analyze this YouTube video based on its title and description.
+Provide a concise analysis covering:
+1. **Topic**: What technology, company, product, or industry trend is covered?
+2. **Audience**: Tech enthusiasts / Developers / Business leaders / General public
+3. **Key takeaway**: One sentence on the main story or announcement
+4. **Why it matters**: The broader tech industry implication in one sentence
+
+Keep it under 80 words total. Be direct and tech-savvy.`,
+    collectionPrompt: `You are a technology news curator. Below is a list of tech news YouTube videos published today, each with an AI analysis.
+Write a brief collection summary (3–4 sentences) that:
+- Identifies the dominant tech stories and themes of the day (e.g., new product launches, industry shifts, regulation, big tech moves)
+- Highlights the most impactful story worth paying attention to
+- Gives readers a crisp sense of where the tech world's attention is focused today
+
+Be punchy and insightful, like a tech news briefing editor.`,
+  },
+  {
     id: "ai-tech",
     name: "AI & Tech",
     emoji: "🤖",
@@ -68,7 +145,8 @@ Be engaging, like a newsletter editor speaking to chess enthusiasts.`,
     channels: [
       { name: "Nate Kerk",      channelId: "UC2ojq-nuP8ceeHqiroeKhBA" },
       { name: "Cole Medin",     channelId: "UCMwVTLZIRRUyyVrkjDpn4pA" },
-      { name: "AI Revolution",  channelId: "UC5l7RouTQ60oUjLjt1Jnjw" },
+      { name: "AI Revolution",   channelId: "UC5l7RouTQ60oUjLjt1Jnjw" },
+      { name: "Claudius Papirus", channelId: "UCYhgVUxsl1PQUOMufZ8I5uQ" },
     ],
     videoPrompt: `You are an AI/technology content analyst. Analyze this YouTube video based on its title and description.
 Provide a concise analysis covering:
@@ -347,9 +425,16 @@ function buildAdvancedEmailHtml(categoryResults: CategoryResult[], date: string)
   return `
   <!DOCTYPE html>
   <html>
-  <head><meta charset="utf-8" /></head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .wrapper { width: 90%; max-width: 900px; margin: 32px auto; }
+      @media (max-width: 600px) { .wrapper { width: 100%; margin: 0; border-radius: 0 !important; } }
+    </style>
+  </head>
   <body style="margin:0;padding:0;background:#f0f2f5;font-family:Arial,sans-serif;">
-    <div style="max-width:640px;margin:32px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.12);">
+    <div class="wrapper" style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.12);">
 
       <!-- Header -->
       <div style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);padding:24px 28px;">
